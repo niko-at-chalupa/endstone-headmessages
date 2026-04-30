@@ -36,5 +36,3 @@ class HeadMessages(Plugin):
                     player.name_tag = player.name
         
         self.server.scheduler.run_task(plugin=self, task=clear_message, delay=700)
-
-        self.server.broadcast_message(f"{event.player.name}.name_tag=\n{event.player.name_tag}")
