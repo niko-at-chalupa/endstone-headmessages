@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "endstone-headmessages"
+version = "0.1.0"
+description = "Displays chat messages above player heads"
+authors = [
+    { name = "niko-at-chalupa" },
+    { name = "nikitalegend" }
+]
+dependencies = [
+    "endstone",
+]
+
+[project.entry-points."endstone"]
+headmessages = "endstone_headmessages:HeadMessages"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/endstone_headmessages"]
