@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "endstone-headmessages"
-version = "0.1.0"
+version = "0.1.1"
 description = "Displays chat messages above player heads"
 authors = [
     { name = "niko-at-chalupa" },
