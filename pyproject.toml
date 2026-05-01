@@ -12,6 +12,7 @@ authors = [
 ]
 dependencies = [
     "endstone",
+    "ruamel.yaml"
 ]
 
 [project.entry-points."endstone"]
