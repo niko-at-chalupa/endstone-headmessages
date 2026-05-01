@@ -38,7 +38,7 @@ class HeadMessages(Plugin):
         
         def clear_message():
             if player in self.player_messages and self.player_messages[player]:
-                self.player_messages[player].pop()
+                self.player_messages[player].pop(0)
             if self.player_messages[player]:
                 messages_text = "\n".join(self.player_messages[player][-3:])
                 event.player.name_tag = f"{cf.GRAY}{player.name}{cf.RESET}\n\n{messages_text}"
