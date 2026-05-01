@@ -97,4 +97,3 @@ class HeadMessages(Plugin):
             update_tag()
         
         self.server.scheduler.run_task(plugin=self, task=clear_message, delay=self.message_decay)
-        print(event.player.name_tag)
