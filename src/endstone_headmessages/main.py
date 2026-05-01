@@ -22,6 +22,8 @@ class HeadMessages(Plugin):
             ("message_decay", 700, "Time (in ticks) before messages go away"),
             ("threshold", 150, "Amount of chars until wrapping/truncation kicks in"),
             ("message_wrapping", True, "Weather to use message wrapping or truncation."),
+            ("player_name_color", "RESET", "Player name colour by default (i.e., no messages). Use Endstone ColorFormat colours ( <https://endstone.dev/latest/reference/python/misc/#endstone.ColorFormat> )"),
+            ("player_name_color_messages", "GRAY", "Player name colour with messages. Use Endstone ColorFormat colours ( <https://endstone.dev/latest/reference/python/misc/#endstone.ColorFormat> )"),
         ]
         if cfg_path.exists():
             with open(cfg_path, "r", encoding="utf-8") as f:
@@ -50,6 +52,8 @@ class HeadMessages(Plugin):
             self.message_decay = cast(int, self.yaml_config.get("message_decay"))
             self.threshold = cast(int, self.yaml_config.get("threshold"))
             self.message_wrapping = cast(bool, self.yaml_config.get("message_wrapping"))
+            self.player_name_color = getattr(cf, cast(str, self.yaml_config.get("player_name_color", "RESET")), cf.RESET)
+            self.player_name_color_messages = getattr(cf, cast(str, self.yaml_config.get("player_name_color_messages", "GRAY")), cf.GRAY)
         except Exception:
             self.logger.error("Your config is bad! Delete it to generate a new one.")
             return
@@ -83,9 +87,11 @@ class HeadMessages(Plugin):
             try:
                 if player in self.player_messages and self.player_messages[player]:
                     messages_text = "\n".join(self.player_messages[player][-3:])
-                    player.name_tag = f"{cf.GRAY}{player.name}{cf.RESET}\n\n{messages_text}"
+                    player.name_tag = f"{self.player_name_color_messages}{player.name}{cf.RESET}\n\n{messages_text}"
                 else:
                     player.name_tag = player.name
+                if player.name_tag == player.name:
+                    player.name_tag = f"{self.player_name_color}{player.name}"
             except Exception:
                 pass
 
